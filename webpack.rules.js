@@ -26,4 +26,19 @@ module.exports = [
       }
     }
   },
+  {
+    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+    use: [
+      {
+        loader: "file-loader",
+        options: {
+          // Here!!!
+          esModule: false,
+          outputPath: "assets/images",
+          publicPath: "assets/images",
+          name: "[name].[ext]"
+        }
+      }
+    ]
+  }
 ];
