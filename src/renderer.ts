@@ -26,6 +26,26 @@
  * ```
  */
 
+import Button from './components/button/Button';
+import "bootstrap/dist/css/bootstrap";
+
 import './index.css';
 
+const app : HTMLDivElement | null = document.getElementById('app') as HTMLDivElement;
+
+if(app) {
+
+    for(let i=0; i < 4; i++) {
+        const b = new Button({
+            variant: Button.variant.primary,
+            text: "Hello World!",
+            onClick: (e: Event) => {
+                const target = e.target as HTMLElement;
+                alert(target.innerText);
+            }
+        });
+        app.appendChild(b.getElement());
+
+    }
+}
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
