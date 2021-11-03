@@ -4,3 +4,13 @@ body {
   max-width: 38rem;
   padding: 2rem;
 }
+
+
+.rounded {
+  border-radius: 100% !important;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center;
+}
