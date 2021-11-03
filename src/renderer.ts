@@ -30,6 +30,8 @@ import Button from './components/button/Button';
 import "bootstrap/dist/css/bootstrap";
 
 import './index.css';
+import Text, { TextType } from './components/text/Text';
+import Image, { ImageProps } from './components/image/Image';
 
 const app : HTMLDivElement | null = document.getElementById('app') as HTMLDivElement;
 
@@ -41,11 +43,64 @@ if(app) {
             text: "Hello World!",
             onClick: (e: Event) => {
                 const target = e.target as HTMLElement;
-                alert(target.innerText);
+                alert(i+1);
             }
         });
         app.appendChild(b.getElement());
 
     }
+
+    const t = new Text({
+        text: "hello",
+        type: TextType.PARAGRAPH
+    });
+
+
+    const i = new Image({
+        src: "./assets/images/shiba.png",
+        alt: "",
+        width: 500,
+        height: 500,
+        isRounded: true
+    })
+
+    console.log(i);
+
+    const elements = [t, i];
+
+    const createImage = ({ src, alt, width, height, isRounded} : ImageProps) => {
+        const el = document.createElement('img');
+        el.src = src;
+        el.alt = alt;
+        el.width = width;
+        el.height = height;
+        el.classList.add('img');
+
+        if(isRounded) {         
+            el.classList.add('rounded');
+        }
+        return el;
+    }
+
+    elements.forEach(e => {
+        if(e instanceof Image) {
+            app.append(createImage(e));
+        }
+    })
+    // const TextHandler = {
+    //     get: function(target: any, prop: any, receiver: any) {
+    //         console.log(prop );
+    //     }
+    // }
+    // const p = new Proxy(t, TextHandler);
+    // console.log('proxy', p);
+
+    // console.log(t);
+
+    // t.text = "Hello World";
+
+    
+    console.log(t);
+    
 }
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
