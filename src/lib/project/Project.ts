@@ -1,3 +1,6 @@
+import Page from "../page/Page";
+import { v4 as uuidv4 } from 'uuid';
+
 interface ProjectPaths {
     export : string,
     import: string
@@ -6,22 +9,22 @@ interface ProjectPaths {
 interface ProjectProps {
     name?: string,
     uuid?: string,
-    // pages?: Page[],
+    pages?: Array<Page>,
     paths?: ProjectPaths,
     imagePreview?: string;
 }
 
 class Project {
     public name: string;
-    public uuid: string;
-    // public pages: Page[];
+    public readonly uuid: string = uuidv4();
+    public pages: Array<Page> = new Array();
     public paths: ProjectPaths;
     public imagePreview: string;
     public static get defaultProps() : Required<ProjectProps> {
         return {
             name : "",
             uuid : "",
-            // pages : [],
+            pages : [],
             paths : {
                 import: "",
                 export: ""
@@ -29,7 +32,6 @@ class Project {
             imagePreview : ""
         }
     }
-    //console.log({...Project.defaultProps, ...config});
     constructor(config?: Partial<ProjectProps>) {
         const { name, uuid, paths, imagePreview } : ProjectProps = {...Project.defaultProps, ...config}
         this.name = name;
