@@ -32,9 +32,33 @@ import "bootstrap/dist/css/bootstrap";
 import './index.css';
 import Text, { TextType } from './components/text/Text';
 import Image, { ImageProps } from './components/image/Image';
+// import Project from './lib/project/Project';
+import Base from './lib/base/Base';
 
 const app : HTMLDivElement | null = document.getElementById('app') as HTMLDivElement;
 
+class Renderer {
+    private static _instance : Renderer;
+    private static elements = Array();
+    private constructor() {}
+    public static getInstance() : Renderer {
+        if(!Renderer._instance) {
+            Renderer._instance = new Renderer();
+        }
+        return Renderer._instance;
+    }
+    public static addComponent<C extends Base>(component: C) : void {
+        this.elements.push(component);
+    }
+    public static removeComponent<C extends Base>(component: C) : void {
+        this.elements.find((obj, idx) => {
+            if(obj === component) this.elements.splice(idx, 1); // if the component is the current object, remove it from the array. 
+        });
+    }
+    private render() {
+        
+    }
+}
 if(app) {
 
     for(let i=0; i < 4; i++) {
@@ -47,7 +71,6 @@ if(app) {
             }
         });
         app.appendChild(b.getElement());
-
     }
 
     const t = new Text({
@@ -63,8 +86,6 @@ if(app) {
         height: 500,
         isRounded: true
     })
-
-    console.log(i);
 
     const elements = [t, i];
 
@@ -87,20 +108,30 @@ if(app) {
             app.append(createImage(e));
         }
     })
-    // const TextHandler = {
-    //     get: function(target: any, prop: any, receiver: any) {
-    //         console.log(prop );
-    //     }
-    // }
-    // const p = new Proxy(t, TextHandler);
-    // console.log('proxy', p);
 
-    // console.log(t);
+    interface TestProps {
+        text?: string;
+        onClick?: (e: EventTarget) => void
+    }
 
-    // t.text = "Hello World";
+    class Test extends Base<TestProps> {
+        constructor(props: TestProps) {
+            super(props);
+            this.defaultProps = {
+                text: "Testing Default",
+                onClick : () => {
+                    console.log("Hello World!")
+                }
+            }
+        }
+    }
 
-    
-    console.log(t);
+    const t2 = new Test({text: "hello", onClick : () => { console.log('asdasd')}});
+
+    // const p = new Project({
+    //     name : "Hello World"
+    // });
+
+    // console.log(p);
     
 }
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
