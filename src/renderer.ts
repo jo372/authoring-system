@@ -37,6 +37,28 @@ import Base from './lib/base/Base';
 
 const app : HTMLDivElement | null = document.getElementById('app') as HTMLDivElement;
 
+class Renderer {
+    private static _instance : Renderer;
+    private static elements = Array();
+    private constructor() {}
+    public static getInstance() : Renderer {
+        if(!Renderer._instance) {
+            Renderer._instance = new Renderer();
+        }
+        return Renderer._instance;
+    }
+    public static addComponent<C extends Base>(component: C) : void {
+        this.elements.push(component);
+    }
+    public static removeComponent<C extends Base>(component: C) : void {
+        this.elements.find((obj, idx) => {
+            if(obj === component) this.elements.splice(idx, 1); // if the component is the current object, remove it from the array. 
+        });
+    }
+    private render() {
+        
+    }
+}
 if(app) {
 
     for(let i=0; i < 4; i++) {
@@ -49,7 +71,6 @@ if(app) {
             }
         });
         app.appendChild(b.getElement());
-
     }
 
     const t = new Text({
@@ -65,8 +86,6 @@ if(app) {
         height: 500,
         isRounded: true
     })
-
-    console.log(i);
 
     const elements = [t, i];
 
@@ -104,31 +123,15 @@ if(app) {
                     console.log("Hello World!")
                 }
             }
-            this.state = {
-                test: true
-            }
-        }
-
-        test() {
-            
-            const [value, updateValue] = this.setState<boolean>(false);            console.log(value);
-            updateValue(true);
-            this.state.test = "asda";
         }
     }
 
     const t2 = new Test({text: "hello", onClick : () => { console.log('asdasd')}});
-    t2.test();
-    console.log(t2.props.text);
-    t2.props.text = "Mohammed";
-    console.log(t2.props.text);
+
     // const p = new Project({
     //     name : "Hello World"
     // });
 
     // console.log(p);
     
-    console.log(t);
-    
 }
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
