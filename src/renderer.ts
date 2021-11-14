@@ -33,7 +33,7 @@ import './index.css';
 import Text, { TextType } from './components/text/Text';
 import Image, { ImageProps } from './components/image/Image';
 // import Project from './lib/project/Project';
-import Base from './lib/base/Base';
+import RenderableComponent from './lib/base/RenderableComponent';
 
 const app : HTMLDivElement | null = document.getElementById('app') as HTMLDivElement;
 
@@ -47,10 +47,10 @@ class Renderer {
         }
         return Renderer._instance;
     }
-    public static addComponent<C extends Base>(component: C) : void {
+    public static addComponent<C extends RenderableComponent>(component: C) : void {
         this.elements.push(component);
     }
-    public static removeComponent<C extends Base>(component: C) : void {
+    public static removeComponent<C extends RenderableComponent>(component: C) : void {
         this.elements.find((obj, idx) => {
             if(obj === component) this.elements.splice(idx, 1); // if the component is the current object, remove it from the array. 
         });
@@ -114,7 +114,7 @@ if(app) {
         onClick?: (e: EventTarget) => void
     }
 
-    class Test extends Base<TestProps> {
+    class Test extends RenderableComponent<TestProps> {
         constructor(props: TestProps) {
             super(props);
             this.defaultProps = {
