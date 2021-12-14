@@ -2,12 +2,12 @@ abstract class RenderableComponent<P = {}> {
     private _defaultProps: Partial<P> = {};
     private _props : Partial<P> = {};
     private _children: RenderableComponent[] = [];
-    constructor(props: Partial<P>) {
-        this._props = props;
+    constructor(props?: Partial<P>) {
+        this._props = props ?? {};
     }
     
     public get props() : Partial<P> {
-        return this._props;
+        return {...this._defaultProps, ...this._props};
     }
 
     private set props(props: Partial<P>) {
@@ -19,8 +19,7 @@ abstract class RenderableComponent<P = {}> {
     }
     
     protected set defaultProps(config: Partial<P>) {
-        this._defaultProps = {...config, ...this._props};
-        this.props = this.defaultProps;
+        this._defaultProps = {...config};
     }
     
     public addChild<C extends RenderableComponent>(child: C) {
@@ -39,6 +38,9 @@ abstract class RenderableComponent<P = {}> {
         return this._children;
     }
 
+    public toJSON() : Record<string, string> {
+        return Object.fromEntries(Object.entries(this.props));
+    }
 }
 
 export default RenderableComponent;

@@ -1,4 +1,4 @@
-import Gallery from "../../components/gallery/Gallery";
+import Gallery from "../../../components/gallery/Gallery";
 
 describe('Gallery', () => {
     it('should contain no image links when constructed', () => {

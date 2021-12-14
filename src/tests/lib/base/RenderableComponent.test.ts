@@ -1,5 +1,6 @@
-import Gallery from "../../components/gallery/Gallery";
-import RenderableComponent from "../../lib/base/RenderableComponent";
+import Button, { ButtonVariant } from "../../../components/button/Button";
+import Gallery from "../../../components/gallery/Gallery";
+import RenderableComponent from "../../../lib/base/RenderableComponent";
 
 describe('Renderable Component', () => {
     it('when a child is pushed is should be added to the component', () => {
@@ -41,4 +42,30 @@ describe('Renderable Component', () => {
         expect(component.children.length).toEqual(0);
         expect(component.children).toEqual([]);
     })
+    it('should return defaultProps and props merged when .props is called', () => {
+        const _defaultProps = { text: 'test' }
+        const _props = { text: 'test2' }
+
+        interface testProps {
+            text: string,
+        }
+        class test extends RenderableComponent {
+            public testableDefaultProps;
+            public testableProps;
+            constructor(props: testProps) {
+                super(props);
+                this.defaultProps = _defaultProps;
+                this.testableDefaultProps = this.defaultProps;
+                this.testableProps = this.props;
+            }
+        }
+        const component = new test(_props);
+        expect(component.testableProps).toEqual({..._defaultProps, ..._props});
+    });
+    it('should return a JSON object when .toJSON is called of all the properties', () => {
+        const props = { text: 'test', variant: ButtonVariant.primary }
+        const button = new Button(props);
+        const json = button.toJSON();
+        expect(json).toMatchObject(props);
+    });
 })
