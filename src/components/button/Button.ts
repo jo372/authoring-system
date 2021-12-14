@@ -1,6 +1,8 @@
-enum ButtonVariant {
+import RenderableComponent from "../../lib/base/RenderableComponent";
+
+export enum ButtonVariant {
     primary = "primary",
-    secondard = "secondary"
+    secondary = "secondary"
 }
 
 export interface ButtonProps {
@@ -9,19 +11,14 @@ export interface ButtonProps {
     onClick?: (e: Event) => void;
 }
 
-class Button {
-    private element: HTMLButtonElement;
-    static variant = ButtonVariant;
-    constructor({variant = Button.variant.primary, text = "", onClick = (e => {})}: ButtonProps) {
-        const el : HTMLButtonElement = document.createElement('button');
-        el.classList.add('btn', `btn-${variant}`);
-        el.innerText = text;
-        el.addEventListener('click', onClick);
-        this.element = el;
-    }
-
-    getElement() {
-        return this.element;
+class Button extends RenderableComponent {
+    constructor(props ?: ButtonProps) {
+        super(props);
+        this.defaultProps = {
+            variant: ButtonVariant.primary,
+            text: "Button",
+            onClick: () => {}
+        }
     }
 }
 
