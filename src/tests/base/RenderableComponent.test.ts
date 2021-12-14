@@ -1,0 +1,44 @@
+import Gallery from "../../components/gallery/Gallery";
+import RenderableComponent from "../../lib/base/RenderableComponent";
+
+describe('Renderable Component', () => {
+    it('when a child is pushed is should be added to the component', () => {
+        const component = new Gallery();
+        const child = new Gallery()
+        component.addChild(child);
+        expect(component.children.length).toEqual(1);
+        expect(component.children[0]).toEqual(child);
+    });
+    it('when properties provided in the constructor, expect props to be equal', () => {
+        const component = new Gallery({ images: ['image1.jpg', 'image2.jpg'] });
+        expect(component.props['images']).not.toBe(null);
+        expect(component.props['images']).toEqual(['image1.jpg', 'image2.jpg']);
+    })
+    it('should add a children when addChild is called', () => {
+        const component = new Gallery();
+        const child = new Gallery()
+        component.addChild(child);
+        expect(component.children.length).toEqual(1);
+        expect(component.children[0]).toEqual(child);
+    })
+    it('should remove a child when removeChild is called', () => {
+        const component = new Gallery();
+        const child = new Gallery()
+        component.addChild(child);
+        expect(component.children.length).toEqual(1);
+        expect(component.children[0]).toEqual(child);
+        component.removeChild(child);
+        expect(component.children.length).toEqual(0);
+        expect(component.children).toEqual([]);
+    })
+    it('should remove a child at index when removeChildAtIndex is called', () => {
+        const component = new Gallery();
+        const child = new Gallery()
+        component.addChild(child);
+        expect(component.children.length).toEqual(1);
+        expect(component.children[0]).toEqual(child);
+        component.removeChildAtIndex(0);
+        expect(component.children.length).toEqual(0);
+        expect(component.children).toEqual([]);
+    })
+})

@@ -7,16 +7,21 @@ interface GalleryProps {
 class Gallery extends RenderableComponent {
     private _images : string[];
     constructor(props ?: GalleryProps) {
-        const images = props?.images ?? [];
-        super(images)
-        this._images = images;
+        super(props ?? {});
+        this.defaultProps = {
+            images: []
+        }
+        this._images = this.props['images'];
     }
+
     public addImageSource(imageSrc: string) {
         this._images.push(imageSrc);
     }
+
     public removeImageSource(imageSrc: string) {
         this._images = this._images.filter(image => image !== imageSrc);
     }
+
     public get images() {
         return this._images;
     }
