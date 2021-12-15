@@ -1,8 +1,21 @@
+import List from "../../../components/list/List";
+import { ListItem } from "../../../components/list/List";
 import Button, { ButtonVariant } from "../../../components/button/Button";
 import Gallery from "../../../components/gallery/Gallery";
 import RenderableComponent from "../../../lib/base/RenderableComponent";
 
 describe('Renderable Component', () => {
+    it('when children are passed as props, they should be added to the children array.', () => {
+        const testableChildren = [
+            new ListItem("Hello World")
+        ]
+        const props = {
+            children: testableChildren
+        }
+        const component = new List(props);
+        expect(component.children.length).toBe(1);
+        expect(component.children[0]).toBe(testableChildren[0]);
+    })
     it('when a child is pushed is should be added to the component', () => {
         const component = new Gallery();
         const child = new Gallery()
