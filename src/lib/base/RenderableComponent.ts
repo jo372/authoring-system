@@ -4,6 +4,10 @@ abstract class RenderableComponent<P = {}> {
     private _children: RenderableComponent[] = [];
     constructor(props?: Partial<P>) {
         this._props = props ?? {};
+        
+        if(this._props['children']) {
+            this._children = this._props['children'] as RenderableComponent[];
+        }
     }
     
     public get props() : Partial<P> {
