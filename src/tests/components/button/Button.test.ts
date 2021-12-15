@@ -1,14 +1,26 @@
 import Button, { ButtonVariant } from "../../../components/button/Button";
 
 describe('Button', () => {
-    it('shoud', () => {
+    it('the default variant should be primary', () => {
+        const button = new Button();
+        expect(button.props['variant']).toBe(ButtonVariant.primary);        
+    })
+    it('the default text should be "Button"', () => {
+        const button = new Button();
+        expect(button.props['text']).toBe("Button");
+    })
+    it('the default onClick should be an empty function', () => {
+        const button = new Button();
+        expect(button.props['onClick']).toBeInstanceOf(Function);
+    })
+    it('when props are provided the values should be set', () => {
         const button = new Button({
             variant: ButtonVariant.secondary,
-            text: "Hello World",
-            onClick: () => {
-                alert("asdasd")
-            }
+            text: "Test",
+            onClick: () => {}
         });
-        console.log(button.toJSON());
+        expect(button.props['variant']).toBe(ButtonVariant.secondary);
+        expect(button.props['text']).toBe("Test");
+        expect(button.props['onClick']).toBeInstanceOf(Function);
     })
 })
