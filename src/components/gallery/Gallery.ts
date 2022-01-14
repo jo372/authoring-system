@@ -4,14 +4,14 @@ interface GalleryProps {
     images?: string[];
 }
 
-class Gallery extends RenderableComponent {
+class Gallery extends RenderableComponent<GalleryProps> {
     private _images : string[];
     constructor(props ?: GalleryProps) {
         super(props);
         this.defaultProps = {
             images: []
         }
-        this._images = this.props['images'];
+        this._images = this.props.images;
     }
 
     public addImageSource(imageSrc: string) {
