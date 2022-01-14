@@ -5,6 +5,78 @@ import Gallery from "../../../components/gallery/Gallery";
 import RenderableComponent from "../../../lib/base/RenderableComponent";
 
 describe('Renderable Component', () => {
+    it('when this.state is called this._state should be set to this.state = {}', () => {
+        interface TestState {
+            test: string;
+        }
+        class Test extends RenderableComponent<{}, TestState> {
+            constructor() {
+                super();
+
+                const testData = {
+                    test: "test"
+                };
+
+                this.state = testData;
+
+                expect(this.state).toEqual(testData);
+            }
+            
+        }
+        new Test();
+    })
+
+    it('when setState is called it should return the previousState', () => {
+        interface TestState {
+            test: string;
+        }
+        interface TestProps {
+            test2: string;
+        }
+        class Test extends RenderableComponent<TestProps, TestState>{
+            constructor() {
+            super();
+
+            const testData = {
+                test: "test"
+            };
+
+            this.state = testData;
+
+            this.setState((prevState) => ({
+                test: "test2" + prevState.test
+            }));
+
+            expect(this.state).toEqual({
+                test: "test2test"
+            });
+        }
+      }
+      new Test();  
+    })
+    it('when setState is called you should be able to update the state value', () => {
+        interface TestState {
+            test: string 
+        }
+        class Test extends RenderableComponent<{}, TestState>{
+            constructor() {
+                super();
+
+                const testData = {
+                    test: "test"
+                }
+                
+                this.state = testData;
+
+                this.setState(prevState => ({
+                    test: "newValue"
+                }));
+
+                expect(this.state.test).toEqual("newValue");
+            }
+        }
+        new Test();
+    })
     it('when children are passed as props, they should be added to the children array.', () => {
         const testableChildren = [
             new ListItem("Hello World")
@@ -18,26 +90,26 @@ describe('Renderable Component', () => {
     })
     it('when a child is pushed is should be added to the component', () => {
         const component = new Gallery();
-        const child = new Gallery()
+        const child = new Gallery();
         component.addChild(child);
         expect(component.children.length).toEqual(1);
         expect(component.children[0]).toEqual(child);
     });
     it('when properties provided in the constructor, expect props to be equal', () => {
         const component = new Gallery({ images: ['image1.jpg', 'image2.jpg'] });
-        expect(component.props['images']).not.toBe(null);
-        expect(component.props['images']).toEqual(['image1.jpg', 'image2.jpg']);
+        expect(component.props.images).not.toBe(null);
+        expect(component.props.images).toEqual(['image1.jpg', 'image2.jpg']);
     })
     it('should add a children when addChild is called', () => {
         const component = new Gallery();
-        const child = new Gallery()
+        const child = new Gallery();
         component.addChild(child);
         expect(component.children.length).toEqual(1);
         expect(component.children[0]).toEqual(child);
     })
     it('should remove a child when removeChild is called', () => {
         const component = new Gallery();
-        const child = new Gallery()
+        const child = new Gallery();
         component.addChild(child);
         expect(component.children.length).toEqual(1);
         expect(component.children[0]).toEqual(child);
@@ -47,7 +119,7 @@ describe('Renderable Component', () => {
     })
     it('should remove a child at index when removeChildAtIndex is called', () => {
         const component = new Gallery();
-        const child = new Gallery()
+        const child = new Gallery();
         component.addChild(child);
         expect(component.children.length).toEqual(1);
         expect(component.children[0]).toEqual(child);

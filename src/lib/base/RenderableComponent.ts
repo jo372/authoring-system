@@ -1,17 +1,56 @@
-abstract class RenderableComponent<P = {}> {
-    private _defaultProps: Partial<P> = {};
+abstract class RenderableComponent<P = {}, S = {}> {
     private _props : Partial<P> = {};
-    private _children: RenderableComponent[] = [];
-    constructor(props?: Partial<P>) {
+    private _defaultProps: Partial<P> = {};
+    private _state : Partial<S> = {};
+    private _children : RenderableComponent[] = [];
+    
+    constructor(props?: P, state?: S) {
         this._props = props ?? {};
-        
+        this._state = state ?? {};
+
         if(this._props['children']) {
             this._children = this._props['children'] as RenderableComponent[];
         }
     }
     
-    public get props() : Partial<P> {
-        return {...this._defaultProps, ...this._props};
+    // public useState = <T>(initial: T) => {
+    //     let state = initial;
+    //     const cb = (value: T) => {
+    //         state = value;
+    //     }
+    //     return [() => state, cb];
+    // }
+
+    protected set state(states: Partial<S>) {
+        this._state = {...states};
+    }
+
+    protected get state() { 
+        return this._state;
+    }
+
+    /**
+     * prevState 
+     * {
+     *    test: "test"
+     * }
+     * 
+     */
+    
+    // setState({ stateName : updatedStateValue })
+
+    // // OR
+    // setState((prevState) => ({ 
+    //    stateName: prevState.stateName + 1 
+    // }))
+
+    protected setState(cb: (prevState: Required<S>, prevProps: Required<P>)=> Partial<S>) {
+        const newState = cb(this._state as Required<S>, this._props as Required<P>);
+        this._state = {...this._state, ...newState};
+    }
+
+    public get props() : Required<P> {
+        return {...this._defaultProps, ...this._props} as Required<P>;
     }
 
     private set props(props: Partial<P>) {

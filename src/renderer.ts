@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap";
 import './index.css';
-import RenderableComponent from './lib/base/RenderableComponent';
+import RenderableComponent from './lib/base/RenderableComponent/RenderableComponent';
 
 
 class Renderer {
