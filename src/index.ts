@@ -13,9 +13,10 @@ const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     height: 600,
-    width: 800,
+    width: 800
   });
 
+  mainWindow.removeMenu();
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 

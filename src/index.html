@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
 
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+</head>
+
+<body>
+  <div id="page-controls" class="page-control__menu">
+    <div class="page-control__wrapper">
+      <div class="page-control__searchbox-wrapper">
+        <label for="page-control__searchbox" class="sr-only">Search Pages</label>
+        <div class="page-control__searchbox">
+          <input id="page-control__searchbox" type="text" placeholder="Search Pages...">
+          <div class="page-control__searchbox__search-icon">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+      <div class="page-control__list">
+        <div class="page-control__list-controls">
+          <div id="page-control__list-controls-toggle">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <h3>Pages</h3>
+          <div id="page-control__list-controls-add-page">
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <div id="page-control__searchbox__no-results" class="hidden">
+          <span>No Results Found :(</span>
+        </div>
+        <ul id="page-control__pages__list">
+        </ul>
+      </div>
+    </div>
+    <div id="page-control__close-button" class="page-control__close-button opened">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+
+  <div id="app"></div>
+</body>
+
 </html>
