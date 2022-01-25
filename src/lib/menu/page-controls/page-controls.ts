@@ -1,3 +1,5 @@
+import Modal from '../../modal/Modal';
+
 interface PageControlsProps {
     text ?: string,
     isActive ?: boolean
@@ -6,6 +8,7 @@ interface PageControlsProps {
 export const PageControlItem = (props?: PageControlsProps) => {
 
     const template = document.createElement('template');
+    const modal = Modal.getInstance();
     const html = `<li class="page-controls__list-item${(props?.isActive ?? false) ? ' active' : ''}">
         <span>${props?.text ? props.text : ''}</span>
         <ul class="page-controls__list-item__options">
@@ -17,5 +20,24 @@ export const PageControlItem = (props?: PageControlsProps) => {
     
     template.innerHTML = html;
 
-    return template.content.firstChild as HTMLLIElement;
+    const pageControl = template.content.firstChild as HTMLLIElement;
+    const listItems = Array.from(pageControl.querySelectorAll('li') as NodeListOf<HTMLLIElement>) ?? [];
+
+    const cloneButton = () => {
+        modal.show();
+    }
+    const editButton = () => {}
+    const deleteButton = () => {
+        modal.setTitle("Warning: This will delete the page");
+        modal.setMessage("Are you sure you want to delete this page?");
+        modal.show();
+    }
+
+
+    listItems[0].addEventListener('click', cloneButton);
+    listItems[1].addEventListener('click', editButton);
+    listItems[2].addEventListener('click', deleteButton);
+
+    return pageControl;
+
 }
