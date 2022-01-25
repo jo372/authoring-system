@@ -1,5 +1,8 @@
 module.exports = {
     preset: 'ts-jest',
-    testEnvironment: 'node',
-    setupFiles: ['dotenv/config']
+    testEnvironment: 'jsdom',
+    setupFiles: ['dotenv/config'],
+    moduleNameMapper: {
+        "\\.(css|sass)$": "identity-obj-proxy",
+    },
 }
