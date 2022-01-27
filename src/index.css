@@ -7,183 +7,6 @@ html, body {
   word-break: break-all;
 }
 
-.page-control__menu {
-  width: 192px;
-  height: 100%;
-  border-right: 1px solid #eaeaea;
-  background-color: #f5f5f5;
-  position: relative;
-  transition: .2s ease-in;
-}
-
-.page-control__menu.closed {
-  transform: translate(-100%);
-  transition: .2s ease-out;
-}
-
-.page-control__wrapper {
-  width: 85%;
-  height: 100%;
-  overflow-y: auto;
-  margin: 0 auto;
-}
-
-.page-control__searchbox {
-  margin-bottom: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  position: relative;
-  width: 100%;
-}
-
-.page-control__searchbox-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  position: relative;
-}
-
-.page-control__menu input {
-  width: 100%;
-  border-radius: 1.5rem;
-  border: 1px solid #eaeaea;
-  text-indent: 1rem;
-} 
-
-.page-control__searchbox__search-icon {
-  position: absolute;
-  left: 85%;
-}
-
-.page-control__pages__list:first-of-type {
-  padding-top: 10px;
-}
-
-.page-control__list ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.page-control__list ul li {
-  transition: .2s;
-  -ms-user-select:none;
-  -moz-user-select:none;
-  -webkit-user-select:none;
-  -webkit-touch-callout: none;
-  -khtml-user-select: none;
-  user-select:none;
-}
-
-.page-control__list ul li:not(.active, .hidden) {
-  cursor: pointer;
-}
-
-.page-control__list ul li:not(.hidden):hover {
-  background-color: #eaeaea;
-}
-
-.page-control__list ul li.active {
-  font-weight: bold;
-}
-
-.page-control__list-controls {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #eaeaea;
-  align-items: center;
-}
-
-.page-control__list-controls h3 {
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-  width: 70%;
-  text-transform: uppercase;
-  font-size: .75rem;
-  font-weight: bold;
-}
-
-.page-control__list-controls .fas {
-  font-size: .75rem;
-}
-
-.page-control__list-controls i {
-  cursor: pointer;
-}
-
-.page-controls__list-item {
-  padding: 5px 5px 5px 10px;
-  border-radius: 5px;
-}
-
-.page-controls__list-item.hidden {
-  color: #e1dede;
-  display: block;
-}
-
-.page-controls__list-item__options {
-  float: right;
-  display: none;
-}
-
-.page-controls__list-item__options li {
-  display: inline;
-  font-size: .75rem;
-  padding-right: 5px;
-  color: #b0b0b0;
-}
-
-.page-controls__list-item__options li:hover {
-  color: #000;
-}
-
-.page-controls__list-item:not(.hidden):hover .page-controls__list-item__options {
-  display: block;
-}
-
-.page-control__close-button {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  padding: 10px;
-  cursor: pointer;
-  background-color: #f5f5f5;
-  border: 1px solid #eaeaea;
-  border-radius: 0px 5px 5px 0px;
-  font-size: .75rem;
-}
-
-.page-control__close-button i {
-  transition: .2s;
-}
-
-.page-control__close-button.opened i {
-  transform: rotateZ(180deg);
-}
-
-#page-control__list-controls-toggle {
-  transition: .2s;
-}
-
-#page-control__list-controls-toggle.toggle {
-  transform: rotateZ(180deg);
-}
-
-#page-control__searchbox__no-results {
-  text-align: center;
-}
-
-#page-control__searchbox__no-results:not(.hidden) ~ #page-control__pages__list {
-  display: none;
-}
-
 .hidden {
   display: none;
 }
@@ -195,4 +18,162 @@ html, body {
   width:1px;
   height:1px;
   overflow:hidden;
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+.main__content {
+  width: 100%;
+  height: 100%;
+}
+
+.main__content nav {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.main__content__nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  margin: 0 auto;
+  flex-direction:column;
+}
+
+.main__content__nav-wrapper > div {
+  margin-top: 10px;
+}
+
+.main__content__nav-logo {
+  justify-content: start;
+  font-weight: bold;
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.main__content__responsive-modes li {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s;
+  cursor: pointer;
+  transition: none !important;
+}
+
+.main__content__responsive-modes li.active {
+  background-color: #ccc;
+}
+
+.main__content__responsive-modes li:hover {
+  background-color: #eaeaea;
+}
+
+.main__content nav > div ul {
+  display: flex;
+}
+
+.main__content nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.main__content nav ul li {
+  transition: .2s;
+  -ms-user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  user-select:none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  margin-left: 2px;
+}
+
+.main__content nav ul li a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 3px;
+  bottom: -1px;
+  right: 100%;
+  transition: .2s;
+  background-color: #7e88ff;
+}
+
+.main__content nav ul li:not(.active):hover a::before {
+  right: 0;
+  animation: .3s fadeIn;
+}
+
+.main__content nav ul li a:not(.active) {
+  cursor: pointer;
+}
+
+.main__content nav ul li.active a::before {
+  right: 0;
+  background-color: #4850b5;
+}
+
+.main__content nav ul li a {
+  display: inline;
+  padding: 10px;
+  text-decoration: none;
+  color: #000;
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+/* Mobile first queries */
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+  .main__content__nav-wrapper {
+    flex-direction: row;
+  }
+
+  .main__content__nav-wrapper > div {
+    margin-top: unset;
+  }
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

@@ -1,0 +1,17 @@
+.preview__window {
+    --navbar-height: 45px;
+    width: 100%;
+    height: calc(100% - var(--navbar-height, 45px));
+    background-color: #cbcbcb;
+}
+  
+.preview__window-app {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    overflow-y: auto;
+    transition: .2s;
+}
+
+  
